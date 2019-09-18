@@ -1,0 +1,27 @@
+{
+  "name": "battleship-game",
+  "version": "1.0.0",
+  "description": "Battleship is a strategy type guessing game for two players. It is played on ruled grids on which each player's fleet of ships (including battleships) are marked.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development --open",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/truetechcode/battleship-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/truetechcode/battleship-game/issues"
+  },
+  "homepage": "https://github.com/truetechcode/battleship-game#readme",
+  "devDependencies": {
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1"
+  }
+}
