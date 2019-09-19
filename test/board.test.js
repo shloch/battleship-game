@@ -2,6 +2,7 @@ import boardFactory from '../src/board';
 
 let gameboard;
 let sample_ship;
+
 beforeEach(() => {
   gameboard = boardFactory();
   sample_ship = {
