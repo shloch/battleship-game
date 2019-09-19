@@ -16,12 +16,15 @@ beforeEach(() => {
 });
 
 test('SHIP IS POSITIONED ON THE BOARD', () => {
-  gameboard.positionShip(sample_ship, 0, 0);
+  const xAxis = 0;
+  gameboard.positionShip(sample_ship, xAxis, 0);
   for (let i = 0; i < gameboard.board.length; i++) {
     for (let j = 0; j < gameboard.board.length; j++) {
-      if (i === 0 && j < 2) {
+      if (i === xAxis && j < sample_ship.length) {
         expect(typeof gameboard.board[i][j]).toBe('object');
-        expect(typeof gameboard.board[i][j]).not.toBe('empty');
+        expect(gameboard.board[i][j]).not.toBe('empty');
+      } else {
+        expect(gameboard.board[i][j]).toBe('empty');
       }
     }
   }
