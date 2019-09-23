@@ -78,11 +78,11 @@ const gameModule = (() => {
     return isShipHit;
   };
 
-  const AttackByComputer = (player, computer) => {
+  const computerAIAttack = (player, computer) => {
     const x, y;
-    let isValidSquare = false;
+    let islegalMove = false;
 
-    while (!isValidSquare) {
+    while (!islegalMove) {
       [x, y] = [...randomCoordinates()];
       const pastMovesIndex = computer.pastMoves
         .findIndex((historyMoves) => {
