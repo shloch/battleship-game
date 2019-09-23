@@ -37,8 +37,8 @@ const startGame = () => {
   gameModule.initializeBoard(computerBoard);
   const player = playerFactory(true, playerBoard, null);
   const computer = playerFactory(false, computerBoard, []);
-  DomModule.displayBoard(playerBoardDiv, player.board.board);
-  DomModule.displayBoard(computerBoardDiv, null);
+  DomModule.renderBoard(playerBoardDiv, player.board.board);
+  DomModule.renderBoard(computerBoardDiv, null);
   DomModule.displayShips(playerShips);
 
 
@@ -47,7 +47,7 @@ const startGame = () => {
     babyCell.addEventListener('click', (event) => {
       const x = event.target.getAttribute('data-index')[0];
       const y = event.target.getAttribute('data-index')[1];
-      attack(player, computer, +x, +y, event.target);
+      gameModule.attackShip(player, computer, +x, +y, event.target);
 
       if (!gameModule.isThereWinner(player, computer)) {
         while (computer.active) {

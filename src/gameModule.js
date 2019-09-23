@@ -4,14 +4,13 @@ import DomModule from './DomModule';
 const gameModule = (() => {
 
   let generateRandomNum23 = () => {
-    let = randomNum = Math.random();
-    if (randomNum > 0.6) randInt23();
-    return Math.floor(randomNum * 3 + 2);
+    let randomNum = Math.random();
+    return (randomNum > 0.5) ? 3 : 2;
   };
 
   const toggleHorizontal = () => (Math.random() < 0.5);
 
-  export const randomCoordinates = () => {
+  const randomCoordinates = () => {
     const x = Math.round(Math.random() * 9);
     const y = Math.round(Math.random() * 9);
     return [x, y];
@@ -45,11 +44,11 @@ const gameModule = (() => {
 
   mod.isThereWinner = (player, computer) => {
     let isWinner = false;
-    if (player.board.allSunk() || computer.board.allSunk()) {
+    if (player.board.isSunk() || computer.board.isSunk()) {
       isWinner = true;
       player.active = false;
       computer.active = false;
-      if (computer.board.allSunk()) {
+      if (computer.board.isSunk()) {
         DomModule.announceWinner('GAME OVER : Player Won !!!');
       } else {
         DomModule.announceWinner('GAME OVER : Computer Won !!!');
@@ -64,7 +63,7 @@ const gameModule = (() => {
 
     const isShipHit = opponent.board.receiveAttack(row, col);
     let hitOrMiss = (isShipHit) ? 'hit' : 'miss';
-    DomModule.addClassToDiv(attackedDiv, hitOrMiss);
+    attackedDiv.classList.add(hitOrMiss);
     if (!isShipHit) {
       attacker.active = false;
       opponent.active = true;
@@ -73,7 +72,7 @@ const gameModule = (() => {
   };
 
   mod.computerAIAttack = (player, computer) => {
-    const x, y;
+    let x, y;
     let islegalMove = false;
 
     while (!islegalMove) {

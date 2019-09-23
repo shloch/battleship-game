@@ -10,7 +10,7 @@ const DomModule = (() => {
           gridDiv.setAttribute('id', `${row}${col}`);
           gridDiv.classList.add('playerBoard');
           if (matrix[row][col] !== 'empty' && matrix[row][col] !== 'no-ship') {
-            div.classList.add('ship');
+            gridDiv.classList.add('ship');
           }
         }
         parent.appendChild(gridDiv);
