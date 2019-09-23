@@ -35,9 +35,9 @@ const gameModule = (() => {
     }*/
 
     while (count < 5) {
-      const generatedShip = shipFactory(generateRandomNum23(), toggleHorizontal());
-      [x, y] = [...randomCoordinates()];
-      const positionedShip = board.positionShip(generatedShip, x, y);
+      const generatedShips = shipFactory(generateRandomNum23(), toggleHorizontal());
+      let [x, y] = [...randomCoordinates()];
+      const positionedShip = board.positionShip(generatedShips, x, y);
       if (positionedShip !== 'invalid_XY') {
         count += 1;
         allSHips.push(positionedShip);
@@ -46,10 +46,10 @@ const gameModule = (() => {
     return allSHips;
   };
 
-  //ONCTINUE BELOW
-  const checkForWin = (player, computer) => {
-    let win;
+  const isThereWinner = (player, computer) => {
+    let isWinner = false;
     if (player.board.allSunk() || computer.board.allSunk()) {
+      isWinner = true;
       player.active = false;
       computer.active = false;
       if (computer.board.allSunk()) {
@@ -57,12 +57,46 @@ const gameModule = (() => {
       } else {
         DisplayModule.displayMessage('Computer Wins!');
       }
-      const button = document.getElementById('restart');
-      button.classList.remove('hide');
-      button.addEventListener('click', () => { window.location.reload() }, false);
-      win = true;
-    } else {
-      win = false;
+      const retstartButton = document.getElementById('restart');
+      retstartButton.classList.remove('hide');
+      retstartButton.addEventListener('click', () => { window.location.reload() }, false);
+
     }
-    return win;
+    return isWinner;
   };
+
+  const attackShip = (attacker, opponent, row, col, attackedDiv) => {
+    if (!attacker.active) return;
+
+    const isShipHit = opponent.board.receiveAttack(row, col);
+    let hitOrMiss = (isShipHit) ? 'hit' : 'miss';
+    DisplayModule.addClassToDiv(attackedDiv, hitOrMiss);
+    if (!isShipHit) {
+      attacker.active = false;
+      opponent.active = true;
+    }
+    return isShipHit;
+  };
+
+  const AttackByComputer = (player, computer) => {
+    const x, y;
+    let isValidSquare = false;
+
+    while (!isValidSquare) {
+      [x, y] = [...randomCoordinates()];
+      const pastMovesIndex = computer.pastMoves
+        .findIndex((historyMoves) => {
+          historyMoves[0] === x && historyMoves[1] === y
+        });
+      if (pastMovesIndex === -1) {
+        isValidSquare = true;
+      };
+    }
+    computer.pastMoves.push([x, y]);
+    const attackedDivID = document.getElementById(`${x}${y}`);
+    attackShip(computer, player, x, y, attackedDivID);
+    isThereWinner(player, computer);
+  };
+})();
+
+export default gameModule;
