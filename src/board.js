@@ -71,7 +71,7 @@ const boardFactory = () => {
   const receiveAttack = (x, y) => {
     let isAttacked = false;
     if (board[x][y] === 'empty') {
-      board[x][y] = 'miss';
+      board[x][y] = 'no-ship';
     } else {
       const ship = board[x][y];
       const attack = ship.cells.findIndex((cells) => cells[0] === x && cells[1] === y);

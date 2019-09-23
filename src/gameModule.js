@@ -1,27 +1,24 @@
 import shipFactory from './ship';
-import playerFactory from './player';
-import boardFactory from './board';
-//import DisplayModule from './displayModule';
-//import { randomBoolean, randomCoordinates } from './utilities';
-
-/**********utility functions*********************** */
-let generateRandomNum23 = () => {
-  let = randomNum = Math.random();
-  if (randomNum > 0.6) randInt23();
-  return Math.floor(randomNum * 3 + 2);
-};
-
-const toggleHorizontal = () => (Math.random() < 0.5);
-
-export const randomCoordinates = () => {
-  const x = Math.round(Math.random() * 9);
-  const y = Math.round(Math.random() * 9);
-  return [x, y];
-};
-/**********utility functions[end]*********************** */
+import DomModule from './DomModule';
 
 const gameModule = (() => {
-  const initializeBoard = (board) => {
+
+  let generateRandomNum23 = () => {
+    let = randomNum = Math.random();
+    if (randomNum > 0.6) randInt23();
+    return Math.floor(randomNum * 3 + 2);
+  };
+
+  const toggleHorizontal = () => (Math.random() < 0.5);
+
+  export const randomCoordinates = () => {
+    const x = Math.round(Math.random() * 9);
+    const y = Math.round(Math.random() * 9);
+    return [x, y];
+  };
+
+  const mod = {};
+  mod.initializeBoard = (board) => {
     let count = 0;
     const allSHips = [];
 
@@ -46,31 +43,28 @@ const gameModule = (() => {
     return allSHips;
   };
 
-  const isThereWinner = (player, computer) => {
+  mod.isThereWinner = (player, computer) => {
     let isWinner = false;
     if (player.board.allSunk() || computer.board.allSunk()) {
       isWinner = true;
       player.active = false;
       computer.active = false;
       if (computer.board.allSunk()) {
-        DisplayModule.displayMessage('Player Wins!');
+        DomModule.announceWinner('GAME OVER : Player Won !!!');
       } else {
-        DisplayModule.displayMessage('Computer Wins!');
+        DomModule.announceWinner('GAME OVER : Computer Won !!!');
       }
-      const retstartButton = document.getElementById('restart');
-      retstartButton.classList.remove('hide');
-      retstartButton.addEventListener('click', () => { window.location.reload() }, false);
-
+      DomModule.displayRestartButton();
     }
     return isWinner;
   };
 
-  const attackShip = (attacker, opponent, row, col, attackedDiv) => {
+  mod.attackShip = (attacker, opponent, row, col, attackedDiv) => {
     if (!attacker.active) return;
 
     const isShipHit = opponent.board.receiveAttack(row, col);
     let hitOrMiss = (isShipHit) ? 'hit' : 'miss';
-    DisplayModule.addClassToDiv(attackedDiv, hitOrMiss);
+    DomModule.addClassToDiv(attackedDiv, hitOrMiss);
     if (!isShipHit) {
       attacker.active = false;
       opponent.active = true;
@@ -78,7 +72,7 @@ const gameModule = (() => {
     return isShipHit;
   };
 
-  const computerAIAttack = (player, computer) => {
+  mod.computerAIAttack = (player, computer) => {
     const x, y;
     let islegalMove = false;
 
@@ -97,6 +91,8 @@ const gameModule = (() => {
     attackShip(computer, player, x, y, attackedDivID);
     isThereWinner(player, computer);
   };
+
+  return mod;
 })();
 
 export default gameModule;

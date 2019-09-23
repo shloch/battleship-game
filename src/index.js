@@ -1,35 +1,63 @@
-console.log('test');
+import gameModule from './gameModule';
+import DomModule from './DomModule';
+import boardFactory from './board';
+import playerFactory from './player';
 
+const play = document.getElementById('play');
+//const randomize = document.getElementById('randomize');
+
+/*
+function wipeDom() {
+  const emptyBoard = (babyCell, parentId) => {
+    DomModule.emptyBoard('.playerBoard', 'playerBoard');
+    DomModule.emptyBoard('.computerBoard', 'computerBoard');
+    gameModule.startGame();
+  }
+}
+*/
+
+function beginsGame() {
+  const computerBoardDivs = document.querySelectorAll('.computerBoard');
+  [...computerBoardDivs].forEach((gridDiv) => {
+    gridDiv.classList.remove('inactive');
+  });
+  play.classList.add('hide');
+}
+
+//randomize.addEventListener('click', wipeDom, false);
+
+play.addEventListener('click', beginsGame, false);
 
 const startGame = () => {
   const playerBoardDiv = document.getElementById('playerBoard');
   const computerBoardDiv = document.getElementById('computerBoard');
-  const playerBoard = gameboardFactory();
-  const computerBoard = gameboardFactory();
-  const playerShips = initializeBoard(playerBoard);
-  initializeBoard(computerBoard);
+  const playerBoard = boardFactory();
+  const computerBoard = boardFactory();
+  const playerShips = gameModule.initializeBoard(playerBoard);
+  gameModule.initializeBoard(computerBoard);
   const player = playerFactory(true, playerBoard, null);
   const computer = playerFactory(false, computerBoard, []);
-  DisplayModule.displayBoard(playerBoardDiv, player.board.board);
-  DisplayModule.displayBoard(computerBoardDiv, null);
-  DisplayModule.displayShips(playerShips);
+  DomModule.displayBoard(playerBoardDiv, player.board.board);
+  DomModule.displayBoard(computerBoardDiv, null);
+  DomModule.displayShips(playerShips);
 
-  const callback = (e) => {
-    const row = e.target.getAttribute('data-index')[0];
-    const col = e.target.getAttribute('data-index')[1];
 
-    attack(player, computer, +row, +col, e.target);
+  const computerBoardGridDivs = document.querySelectorAll('.computerBoard');
+  [...computerBoardGridDivs].forEach((babyCell) => {
+    babyCell.addEventListener('click', (event) => {
+      const x = event.target.getAttribute('data-index')[0];
+      const y = event.target.getAttribute('data-index')[1];
+      attack(player, computer, +x, +y, event.target);
 
-    if (!checkForWin(player, computer)) {
-      while (computer.active) {
-        computerMove(player, computer);
+      if (!gameModule.isThereWinner(player, computer)) {
+        while (computer.active) {
+          gameModule.computerAIAttack(player, computer);
+        }
       }
-    }
-  };
-
-  const computerBoardDivs = document.querySelectorAll('.computerBoard');
-  [...computerBoardDivs].forEach((div) => {
-    div.addEventListener('click', callback, false);
-    DisplayModule.addClassToDiv(div, 'inactive');
+    }, false);
+    babyCell.classList.add('inactive');
+    //DomModule.addClassToDiv(div, 'inactive');
   });
 };
+
+startGame();
