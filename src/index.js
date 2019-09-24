@@ -4,17 +4,6 @@ import boardFactory from './board';
 import playerFactory from './player';
 
 const play = document.getElementById('play');
-//const randomize = document.getElementById('randomize');
-
-/*
-function wipeDom() {
-  const emptyBoard = (babyCell, parentId) => {
-    DomModule.emptyBoard('.playerBoard', 'playerBoard');
-    DomModule.emptyBoard('.computerBoard', 'computerBoard');
-    gameModule.startGame();
-  }
-}
-*/
 
 function beginsGame() {
   const computerBoardDivs = document.querySelectorAll('.computerBoard');
@@ -24,7 +13,15 @@ function beginsGame() {
   play.classList.add('hide');
 }
 
-//randomize.addEventListener('click', wipeDom, false);
+const checkShipSunkStatus = (attackersTotalShips) => {
+  let totalSunk = 0;
+  for (let ship of attackersTotalShips) {
+    if (ship.isSunk()) {
+      totalSunk += 1;
+    }
+  }
+  return totalSunk;
+}
 
 play.addEventListener('click', beginsGame, false);
 
@@ -34,7 +31,7 @@ const startGame = () => {
   const playerBoard = boardFactory();
   const computerBoard = boardFactory();
   const playerShips = gameModule.initializeBoard(playerBoard);
-  gameModule.initializeBoard(computerBoard);
+  const computerShips = gameModule.initializeBoard(computerBoard);
   const player = playerFactory(true, playerBoard, null);
   const computer = playerFactory(false, computerBoard, []);
   DomModule.renderBoard(playerBoardDiv, player.board.board);
@@ -47,15 +44,23 @@ const startGame = () => {
     babyCell.addEventListener('click', (event) => {
       const x = event.target.getAttribute('data-index')[0];
       const y = event.target.getAttribute('data-index')[1];
+
+      //let totalPlayerShipsSunk = checkShipSunkStatus(playerShips);
+      //DomModule.announceTotalShipSunk('.numberShipsPlayerAttacked', totalPlayerShipsSunk)
       gameModule.attackShip(player, computer, +x, +y, event.target);
+
       if (!gameModule.isThereWinner(player, computer)) {
         while (computer.active) {
+          let totalComputerShipsSunk = checkShipSunkStatus(computerShips);
+          const statusDiv = document.querySelector('.numberShipsComputerAttacked');
+          statusDiv.innerHTML = `SHIPS HIT FROM ATTACK : ${totalComputerShipsSunk}`;
+          //DomModule.announceTotalShipSunk('.numberShipsComputerAttacked', totalComputerShipsSunk)
           gameModule.computerAIAttack(player, computer);
+
         }
       }
     }, false);
     babyCell.classList.add('inactive');
-    //DomModule.addClassToDiv(div, 'inactive');
   });
 };
 

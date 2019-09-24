@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Saira+Stencil+One&display=swap');
 body {
   text-align: center;
+  background-image: url("../battleship_bg.jpg");
 }
 
 h1 {
+  font-family: 'Saira Stencil One', cursive;
   text-align: center;
-  font-size: 40px;
+  font-size: 72px;
   margin-top: 30px;
+  color: yellow
 }
 
 #main {
@@ -41,7 +45,7 @@ div.computerBoard {
 }
 
 .playerBoard.ship {
-  background-color: #cec6c6;
+  background-color: deepskyblue;
 }
 
 .playerBoard.ship.horizontal {
@@ -80,11 +84,12 @@ div.computerBoard {
 }
 
 .miss {
-  background-color: lightblue;
+  background-color: rgb(136, 136, 136);
 }
 
 .playerBoard.hit {
-  background-color: brown;
+  background-color: rgb(7, 85, 110);
+  
 }
 
 #message {

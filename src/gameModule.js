@@ -28,15 +28,6 @@ const gameModule = (() => {
     let count = 0;
     const allSHips = [];
 
-    /*while (count1 < 4) {
-      const ship = shipFactory(1, true);
-      const placedShip = board.placeShip(ship, randomCoordinates());
-      if (placedShip !== -1) {
-        count1 += 1;
-        placedShips.push(placedShip);
-      }
-    }*/
-
     while (count < 5) {
       const generatedShips = shipFactory(generateRandomNum23(), toggleHorizontal());
       let [x, y] = [...randomCoordinates()];
@@ -66,17 +57,16 @@ const gameModule = (() => {
   };
 
   mod.attackShip = (attacker, opponent, x, y, attackedDiv) => {
-    if (attacker.pastMoves == null) {
-      console.log(`attacker = PLAYER `);
-    } else {
-      console.log(`attacker = AI `);
-    }
 
     if (!attacker.active) return;
 
     const isShipHit = opponent.board.receiveAttack(x, y);
     let hitOrMiss = (isShipHit) ? 'hit' : 'miss';
     attackedDiv.classList.add(hitOrMiss);
+    if (attacker.pastMoves != null && hitOrMiss == 'hit') {
+      //attackedDiv.innerHTML = '<i class="fa fa-tired"></i>';
+    }
+    //attackedDiv.innerHTML = '&#9760;';   &#9793;
     if (!isShipHit) {
       attacker.active = false;
       opponent.active = true;
@@ -97,6 +87,7 @@ const gameModule = (() => {
     computer.pastMoves.push([x, y]);
     const attackedDivID = document.getElementById(`${x}${y}`);
     gameModule.attackShip(computer, player, x, y, attackedDivID);
+
     gameModule.isThereWinner(player, computer);
   };
 

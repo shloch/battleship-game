@@ -33,10 +33,6 @@ const DomModule = (() => {
     });
   };
 
-  //const addClassToDiv = (div, className) => {
-  // div.classList.add(className);
-  //};
-
   const emptyBoard = (babyCell, parentId) => {
     const children = document.querySelectorAll(babyCell);
     const parent = document.getElementById(parentId);
@@ -57,8 +53,13 @@ const DomModule = (() => {
     retstartButton.addEventListener('click', () => { window.location.reload() }, false);
   }
 
+  const announceTotalShipSunkStatus = (statusDivName, count) => {
+    const statusDiv = document.querySelector(statusDivName);
+    statusDiv.innerHTML = `SHIPS HIT FROM ATTACK : ${count}`;
+  }
+
   return {
-    renderBoard, displayShips, emptyBoard, announceWinner, displayRestartButton,
+    renderBoard, displayShips, emptyBoard, announceWinner, displayRestartButton, announceTotalShipSunkStatus
   };
 })();
 
