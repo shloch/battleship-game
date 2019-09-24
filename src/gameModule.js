@@ -16,6 +16,13 @@ const gameModule = (() => {
     return [x, y];
   };
 
+  const checkAIPastMoves = (passMovesArray, xCoord, yCoord) => {
+    for (let elt of passMovesArray) {
+      if (elt[0] == xCoord && elt[1] == yCoord) return true;
+    }
+    return false;
+  };
+
   const mod = {};
   mod.initializeBoard = (board) => {
     let count = 0;
@@ -44,11 +51,11 @@ const gameModule = (() => {
 
   mod.isThereWinner = (player, computer) => {
     let isWinner = false;
-    if (player.board.isSunk() || computer.board.isSunk()) {
+    if (player.board.checkIfAllShipsSunk() || computer.board.checkIfAllShipsSunk()) {
       isWinner = true;
       player.active = false;
       computer.active = false;
-      if (computer.board.isSunk()) {
+      if (computer.board.checkIfAllShipsSunk()) {
         DomModule.announceWinner('GAME OVER : Player Won !!!');
       } else {
         DomModule.announceWinner('GAME OVER : Computer Won !!!');
@@ -58,10 +65,16 @@ const gameModule = (() => {
     return isWinner;
   };
 
-  mod.attackShip = (attacker, opponent, row, col, attackedDiv) => {
+  mod.attackShip = (attacker, opponent, x, y, attackedDiv) => {
+    if (attacker.pastMoves == null) {
+      console.log(`attacker = PLAYER `);
+    } else {
+      console.log(`attacker = AI `);
+    }
+
     if (!attacker.active) return;
 
-    const isShipHit = opponent.board.receiveAttack(row, col);
+    const isShipHit = opponent.board.receiveAttack(x, y);
     let hitOrMiss = (isShipHit) ? 'hit' : 'miss';
     attackedDiv.classList.add(hitOrMiss);
     if (!isShipHit) {
@@ -76,19 +89,15 @@ const gameModule = (() => {
     let islegalMove = false;
 
     while (!islegalMove) {
-      [x, y] = [...randomCoordinates()];
-      const pastMovesIndex = computer.pastMoves
-        .findIndex((historyMoves) => {
-          historyMoves[0] === x && historyMoves[1] === y
-        });
-      if (pastMovesIndex === -1) {
-        isValidSquare = true;
-      };
+      [x, y] = [...randomCoordinates()]
+      if (checkAIPastMoves(computer.pastMoves, x, y) == false) {
+        islegalMove = true;
+      }
     }
     computer.pastMoves.push([x, y]);
     const attackedDivID = document.getElementById(`${x}${y}`);
-    attackShip(computer, player, x, y, attackedDivID);
-    isThereWinner(player, computer);
+    gameModule.attackShip(computer, player, x, y, attackedDivID);
+    gameModule.isThereWinner(player, computer);
   };
 
   return mod;

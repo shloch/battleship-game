@@ -74,7 +74,7 @@ const boardFactory = () => {
       board[x][y] = 'no-ship';
     } else {
       const ship = board[x][y];
-      const attack = ship.cells.findIndex((cells) => cells[0] === x && cells[1] === y);
+      const attack = ship.cells.findIndex((cell) => cell[0] === x && cell[1] === y);
       ship.hit(attack);
       isAttacked = true;
     }

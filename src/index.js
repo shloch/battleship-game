@@ -48,7 +48,6 @@ const startGame = () => {
       const x = event.target.getAttribute('data-index')[0];
       const y = event.target.getAttribute('data-index')[1];
       gameModule.attackShip(player, computer, +x, +y, event.target);
-
       if (!gameModule.isThereWinner(player, computer)) {
         while (computer.active) {
           gameModule.computerAIAttack(player, computer);
