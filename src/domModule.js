@@ -53,13 +53,13 @@ const DomModule = (() => {
     retstartButton.addEventListener('click', () => { window.location.reload() }, false);
   }
 
-  const announceTotalShipSunkStatus = (statusDivName, count) => {
+  /*const announceTotalShipSunkStatus = (statusDivName, count) => {
     const statusDiv = document.querySelector(statusDivName);
     statusDiv.innerHTML = `SHIPS HIT FROM ATTACK : ${count}`;
-  }
+  }*/
 
   return {
-    renderBoard, displayShips, emptyBoard, announceWinner, displayRestartButton, announceTotalShipSunkStatus
+    renderBoard, displayShips, emptyBoard, announceWinner, displayRestartButton,
   };
 })();
 

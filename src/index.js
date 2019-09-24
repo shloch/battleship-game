@@ -51,9 +51,9 @@ const startGame = () => {
 
       if (!gameModule.isThereWinner(player, computer)) {
         while (computer.active) {
-          let totalComputerShipsSunk = checkShipSunkStatus(computerShips);
-          const statusDiv = document.querySelector('.numberShipsComputerAttacked');
-          statusDiv.innerHTML = `SHIPS HIT FROM ATTACK : ${totalComputerShipsSunk}`;
+          //let totalComputerShipsSunk = checkShipSunkStatus(computerShips);
+          //const statusDiv = document.querySelector('.numberShipsComputerAttacked');
+          //statusDiv.innerHTML = `SHIPS HIT FROM ATTACK : ${totalComputerShipsSunk}`;
           //DomModule.announceTotalShipSunk('.numberShipsComputerAttacked', totalComputerShipsSunk)
           gameModule.computerAIAttack(player, computer);
 
