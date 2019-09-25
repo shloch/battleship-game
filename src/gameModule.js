@@ -47,8 +47,10 @@ const gameModule = (() => {
       player.active = false;
       computer.active = false;
       if (computer.board.checkIfAllShipsSunk()) {
+        DomModule.updateTotalShipSunkStatus('shipsAttackedByComputer', 5)
         DomModule.announceWinner('GAME OVER : Player Won !!!');
       } else {
+        DomModule.updateTotalShipSunkStatus('shipsAttackedByPlayer', 5)
         DomModule.announceWinner('GAME OVER : Computer Won !!!');
       }
       DomModule.displayRestartButton();
@@ -90,6 +92,16 @@ const gameModule = (() => {
 
     gameModule.isThereWinner(player, computer);
   };
+
+  mod.checkNumberOfShipSunk = (opponentTotalShips) => {
+    let totalSunk = 0;
+    for (let ship of opponentTotalShips) {
+      if (ship.isSunk()) {
+        totalSunk += 1;
+      }
+    }
+    return totalSunk;
+  }
 
   return mod;
 })();

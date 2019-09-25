@@ -1,3 +1,5 @@
+import gameModule from './gameModule';
+
 const DomModule = (() => {
   const renderBoard = (parent, matrix) => {
     for (let row = 0; row < 10; row += 1) {
@@ -53,13 +55,13 @@ const DomModule = (() => {
     retstartButton.addEventListener('click', () => { window.location.reload() }, false);
   }
 
-  /*const announceTotalShipSunkStatus = (statusDivName, count) => {
-    const statusDiv = document.querySelector(statusDivName);
-    statusDiv.innerHTML = `SHIPS HIT FROM ATTACK : ${count}`;
-  }*/
+  const updateTotalShipSunkStatus = (statusDiv, totalShipsSunk) => {
+    let status = document.getElementById(statusDiv);
+    status.innerHTML = `Number of ships sunk : ${totalShipsSunk}`;
+  }
 
   return {
-    renderBoard, displayShips, emptyBoard, announceWinner, displayRestartButton,
+    renderBoard, displayShips, emptyBoard, announceWinner, displayRestartButton, updateTotalShipSunkStatus,
   };
 })();
 

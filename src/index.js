@@ -13,16 +13,6 @@ function beginsGame() {
   play.classList.add('hide');
 }
 
-const checkShipSunkStatus = (attackersTotalShips) => {
-  let totalSunk = 0;
-  for (let ship of attackersTotalShips) {
-    if (ship.isSunk()) {
-      totalSunk += 1;
-    }
-  }
-  return totalSunk;
-}
-
 play.addEventListener('click', beginsGame, false);
 
 const startGame = () => {
@@ -45,17 +35,15 @@ const startGame = () => {
       const x = event.target.getAttribute('data-index')[0];
       const y = event.target.getAttribute('data-index')[1];
 
-      //let totalPlayerShipsSunk = checkShipSunkStatus(playerShips);
-      //DomModule.announceTotalShipSunk('.numberShipsPlayerAttacked', totalPlayerShipsSunk)
       gameModule.attackShip(player, computer, +x, +y, event.target);
+      const shipsSunkByPlayer = gameModule.checkNumberOfShipSunk(playerShips);
+      DomModule.updateTotalShipSunkStatus('shipsAttackedByPlayer', shipsSunkByPlayer)
 
       if (!gameModule.isThereWinner(player, computer)) {
         while (computer.active) {
-          //let totalComputerShipsSunk = checkShipSunkStatus(computerShips);
-          //const statusDiv = document.querySelector('.numberShipsComputerAttacked');
-          //statusDiv.innerHTML = `SHIPS HIT FROM ATTACK : ${totalComputerShipsSunk}`;
-          //DomModule.announceTotalShipSunk('.numberShipsComputerAttacked', totalComputerShipsSunk)
           gameModule.computerAIAttack(player, computer);
+          let shipsSunkByComputer = gameModule.checkNumberOfShipSunk(computerShips);
+          DomModule.updateTotalShipSunkStatus('shipsAttackedByComputer', shipsSunkByComputer)
 
         }
       }
