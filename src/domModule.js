@@ -1,4 +1,3 @@
-import gameModule from './gameModule';
 
 const DomModule = (() => {
   const renderBoard = (parent, matrix) => {
@@ -45,8 +44,10 @@ const DomModule = (() => {
   };
 
   const announceWinner = (winningMessage) => {
+    const gameOverDiv = document.querySelector('#flashinfo');
     const flashInfosDiv = document.getElementById('flashinfo2');
     flashInfosDiv.textContent = winningMessage;
+    gameOverDiv.innerHTML = '<img src="./assets/images/gameover.png" alt="over">';    
   };
 
   const displayRestartButton = () => {
@@ -60,8 +61,12 @@ const DomModule = (() => {
     status.innerHTML = `Number of ships sunk : ${totalShipsSunk}`;
   }
 
+  const renderAngryFace = (attackedDiv) => {
+    attackedDiv.innerHTML = '<img src="./assets/images/sadguy.png" alt="sad">';
+  }
+
   return {
-    renderBoard, displayShips, emptyBoard, announceWinner, displayRestartButton, updateTotalShipSunkStatus,
+    renderBoard, displayShips, emptyBoard, announceWinner, displayRestartButton, updateTotalShipSunkStatus, renderAngryFace,
   };
 })();
 
