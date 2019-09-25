@@ -56,7 +56,7 @@ const DomModule = (() => {
   }
 
   const updateTotalShipSunkStatus = (statusDiv, totalShipsSunk) => {
-    let status = document.getElementById(statusDiv);
+    const status = document.getElementById(statusDiv);
     status.innerHTML = `Number of ships sunk : ${totalShipsSunk}`;
   }
 

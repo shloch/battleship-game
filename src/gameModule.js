@@ -66,9 +66,8 @@ const gameModule = (() => {
     let hitOrMiss = (isShipHit) ? 'hit' : 'miss';
     attackedDiv.classList.add(hitOrMiss);
     if (attacker.pastMoves != null && hitOrMiss == 'hit') {
-      //attackedDiv.innerHTML = '<i class="fa fa-tired"></i>';
+      attackedDiv.innerHTML = 'X';
     }
-    //attackedDiv.innerHTML = '&#9760;';   &#9793;
     if (!isShipHit) {
       attacker.active = false;
       opponent.active = true;
