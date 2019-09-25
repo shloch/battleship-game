@@ -1,5 +1,5 @@
 import gameModule from './gameModule';
-import DomModule from './DomModule';
+import DomModule from './domModule';
 import boardFactory from './board';
 import playerFactory from './player';
 

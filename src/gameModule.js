@@ -1,5 +1,5 @@
 import shipFactory from './ship';
-import DomModule from './DomModule';
+import DomModule from './domModule';
 
 const gameModule = (() => {
 
@@ -41,6 +41,7 @@ const gameModule = (() => {
   };
 
   mod.isThereWinner = (player, computer) => {
+    const gameOverDiv = document.querySelector('#flashinfo');
     let isWinner = false;
     if (player.board.checkIfAllShipsSunk() || computer.board.checkIfAllShipsSunk()) {
       isWinner = true;
@@ -48,10 +49,12 @@ const gameModule = (() => {
       computer.active = false;
       if (computer.board.checkIfAllShipsSunk()) {
         DomModule.updateTotalShipSunkStatus('shipsAttackedByComputer', 5)
-        DomModule.announceWinner('GAME OVER : Player Won !!!');
+        DomModule.announceWinner('Player Won !!!');
+        gameOverDiv.innerHTML = '<img src="./assets/images/gameover.png" alt="over">';
       } else {
         DomModule.updateTotalShipSunkStatus('shipsAttackedByPlayer', 5)
-        DomModule.announceWinner('GAME OVER : Computer Won !!!');
+        DomModule.announceWinner('Computer Won !!!');
+        gameOverDiv.innerHTML = '<img src="./assets/images/gameover.png" alt="over">';
       }
       DomModule.displayRestartButton();
     }
@@ -66,7 +69,7 @@ const gameModule = (() => {
     let hitOrMiss = (isShipHit) ? 'hit' : 'miss';
     attackedDiv.classList.add(hitOrMiss);
     if (attacker.pastMoves != null && hitOrMiss == 'hit') {
-      attackedDiv.innerHTML = 'X';
+      attackedDiv.innerHTML = '<img src="./assets/images/sadguy.png" alt="sad">';
     }
     if (!isShipHit) {
       attacker.active = false;

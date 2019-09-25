@@ -45,7 +45,7 @@ const DomModule = (() => {
   };
 
   const announceWinner = (winningMessage) => {
-    const flashInfosDiv = document.getElementById('flashinfo');
+    const flashInfosDiv = document.getElementById('flashinfo2');
     flashInfosDiv.textContent = winningMessage;
   };
 
