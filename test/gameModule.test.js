@@ -15,7 +15,7 @@ beforeEach(() => {
     hit: jest.fn(),
     isSunk: jest.fn(() => {
       return false;
-    })
+    });
   };
 
   document.body.innerHTML = `
@@ -41,7 +41,7 @@ beforeEach(() => {
 });
 
 test('Ensure the board is initialized', () => {
-  const allShip = gameModule.initializeBoard(gameboard)
+  const allShip = gameModule.initializeBoard(gameboard);
   expect(allShip.length).toBe(5);
   expect(allShip[0].length).toBeGreaterThan(1);
   expect(allShip[0].length).toBeLessThan(4);
@@ -52,17 +52,17 @@ describe('Testing Game module functions', () => {
 
   test('If winner exist', () => {
     const sample_board = boardFactory();
-    const player = playerFactory(true, gameboard, null)
-    const computer = playerFactory(false, sample_board, [])
-    const computerShips = gameModule.initializeBoard(sample_board)
+    const player = playerFactory(true, gameboard, null);
+    const computer = playerFactory(false, sample_board, []);
+    const computerShips = gameModule.initializeBoard(sample_board);
 
     computerShips.forEach((ship) => {
       ship.isSunk = jest.fn(() => {
         return true;
-      })
-    })
+      });
+    });
     const status = document.getElementById('shipsAttackedByPlayer');
-    const playerIsWinner = gameModule.isThereWinner(player, computer)
+    const playerIsWinner = gameModule.isThereWinner(player, computer);
     expect(playerIsWinner).toBe(true);
   });
 
@@ -74,17 +74,17 @@ describe('Testing Game module functions', () => {
     for (let ship = 0; ship < 3; ship += 1) { //sink 3 ships
       computerShip[ship].isSunk = jest.fn(() => {
         return true;
-      })
-    }
-    let totalShipSunk = gameModule.checkNumberOfShipSunk(computerShip)
+      });
+    };
+    let totalShipSunk = gameModule.checkNumberOfShipSunk(computerShip);
     expect(totalShipSunk).toBe(3);
 
     for (let ship = 3; ship < 5; ship += 1) { //sink remaining 2 ships
       computerShip[ship].isSunk = jest.fn(() => {
         return true;
-      })
-    }
-    totalShipSunk = gameModule.checkNumberOfShipSunk(computerShip)
+      });
+    };
+    totalShipSunk = gameModule.checkNumberOfShipSunk(computerShip);
     expect(totalShipSunk).toBe(5);
   });
 
@@ -110,14 +110,12 @@ describe('Testing Game module functions', () => {
   test('Test if COMPUTER AI attacks goes through', () => {
     const sample_board = boardFactory();
 
-    const player = playerFactory(true, gameboard, null)
-    const computer = playerFactory(false, sample_board, [])
-    const playerShips = gameModule.initializeBoard(gameboard)
+    const player = playerFactory(true, gameboard, null);
+    const computer = playerFactory(false, sample_board, []);
+    const playerShips = gameModule.initializeBoard(gameboard);
 
-    const computerShip = gameModule.initializeBoard(sample_board)
-    const AIAttachStatus = gameModule.computerAIAttack(player, computer); //launch 1 AI attack
+    const computerShip = gameModule.initializeBoard(sample_board);
+    const AIAttachStatus = gameModule.computerAIAttack(player, computer);
     expect(AIAttachStatus).toBe(false);
   });
 });
-
-
