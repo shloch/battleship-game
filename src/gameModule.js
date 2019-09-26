@@ -93,11 +93,11 @@ const gameModule = (() => {
 
   mod.checkNumberOfShipSunk = (opponentTotalShips) => {
     let totalSunk = 0;
-    for (let ship of opponentTotalShips) {
+    opponentTotalShips.forEach((ship) => {
       if (ship.isSunk()) {
         totalSunk += 1;
       }
-    }
+    });
     return totalSunk;
   };
 

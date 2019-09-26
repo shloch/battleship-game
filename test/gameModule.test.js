@@ -4,18 +4,16 @@ import boardFactory from '../src/board';
 import playerFactory from '../src/player';
 
 let gameboard;
-let sample_ship;
+let sampleShip;
 
 beforeEach(() => {
   gameboard = boardFactory();
-  sample_ship = {
+  sampleShip = {
     cells: [],
     length: 2,
     isHorizontal: true,
     hit: jest.fn(),
-    isSunk: jest.fn(() => {
-      return false;
-    });
+    isSunk: jest.fn(() => false),
   };
 
   document.body.innerHTML = `
@@ -49,54 +47,46 @@ test('Ensure the board is initialized', () => {
 });
 
 describe('Testing Game module functions', () => {
-
   test('If winner exist', () => {
-    const sample_board = boardFactory();
+    const sampleBoard = boardFactory();
     const player = playerFactory(true, gameboard, null);
-    const computer = playerFactory(false, sample_board, []);
-    const computerShips = gameModule.initializeBoard(sample_board);
+    const computer = playerFactory(false, sampleBoard, []);
+    const computerShips = gameModule.initializeBoard(sampleBoard);
 
     computerShips.forEach((ship) => {
-      ship.isSunk = jest.fn(() => {
-        return true;
-      });
+      ship.isSunk = jest.fn(() => true);
     });
-    const status = document.getElementById('shipsAttackedByPlayer');
     const playerIsWinner = gameModule.isThereWinner(player, computer);
     expect(playerIsWinner).toBe(true);
   });
 
 
   test('check Number Of Ship Sunk', () => {
-    const sample_board = boardFactory();
-    const computerShip = gameModule.initializeBoard(sample_board)
+    const sampleBoard = boardFactory();
+    const computerShip = gameModule.initializeBoard(sampleBoard);
 
-    for (let ship = 0; ship < 3; ship += 1) { //sink 3 ships
-      computerShip[ship].isSunk = jest.fn(() => {
-        return true;
-      });
-    };
+    for (let ship = 0; ship < 3; ship += 1) {
+      computerShip[ship].isSunk = jest.fn(() => true);
+    }
     let totalShipSunk = gameModule.checkNumberOfShipSunk(computerShip);
     expect(totalShipSunk).toBe(3);
 
-    for (let ship = 3; ship < 5; ship += 1) { //sink remaining 2 ships
-      computerShip[ship].isSunk = jest.fn(() => {
-        return true;
-      });
-    };
+    for (let ship = 3; ship < 5; ship += 1) {
+      computerShip[ship].isSunk = jest.fn(() => true);
+    }
     totalShipSunk = gameModule.checkNumberOfShipSunk(computerShip);
     expect(totalShipSunk).toBe(5);
   });
 
 
   test('Test if ship is hit after attack from oponent', () => {
-    const sample_board = boardFactory();
-    const sample_ship = shipFactory(1, true);
-    sample_board.positionShip(sample_ship, 3, 4);
+    const sampleBoard = boardFactory();
+    const sampleShip1 = shipFactory(1, true);
+    sampleBoard.positionShip(sampleShip1, 3, 4);
     const player = playerFactory(true, gameboard, null);
-    const computer = playerFactory(false, sample_board, []);
-    const playerShip = gameModule.initializeBoard(gameboard);
-    const computerShip = gameModule.initializeBoard(sample_board);
+    const computer = playerFactory(false, sampleBoard, []);
+    gameModule.initializeBoard(gameboard);
+    gameModule.initializeBoard(sampleBoard);
 
     const mockDiv2Attack = document.querySelector('.mockDiv2Attack');
     gameModule.attackShip(player, computer, 3, 4, mockDiv2Attack);
@@ -108,13 +98,13 @@ describe('Testing Game module functions', () => {
 
 
   test('Test if COMPUTER AI attacks goes through', () => {
-    const sample_board = boardFactory();
+    const sampleBoard = boardFactory();
 
     const player = playerFactory(true, gameboard, null);
-    const computer = playerFactory(false, sample_board, []);
-    const playerShips = gameModule.initializeBoard(gameboard);
+    const computer = playerFactory(false, sampleBoard, []);
+    gameModule.initializeBoard(gameboard);
 
-    const computerShip = gameModule.initializeBoard(sample_board);
+    gameModule.initializeBoard(sampleBoard);
     const AIAttachStatus = gameModule.computerAIAttack(player, computer);
     expect(AIAttachStatus).toBe(false);
   });

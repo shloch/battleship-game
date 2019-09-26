@@ -12,15 +12,15 @@ beforeEach(() => {
     hit: jest.fn(),
     isSunk: jest.fn(() => {
       return false;
-    });
+    }),
   };
 });
 
 test('SHIP IS POSITIONED ON THE BOARD', () => {
   const xAxis = 0;
   gameboard.positionShip(sampleShip, xAxis, 0);
-  for (let i = 0; i < gameboard.board.length; i++) {
-    for (let j = 0; j < gameboard.board.length; j++) {
+  for (let i = 0; i < gameboard.board.length; i += 1) {
+    for (let j = 0; j < gameboard.board.length; j += 1) {
       if (i === xAxis && j < sampleShip.length) {
         expect(typeof gameboard.board[i][j]).toBe('object');
         expect(gameboard.board[i][j]).not.toBe('empty');
