@@ -93,14 +93,17 @@ describe('Testing Game module functions', () => {
     const sample_board = boardFactory();
     const sample_ship = shipFactory(1, true);
     sample_board.positionShip(sample_ship, 3, 4);
-    const player = playerFactory(true, gameboard, null)
-    const computer = playerFactory(false, sample_board, [])
-    const playerShip = gameModule.initializeBoard(gameboard)
-    const computerShip = gameModule.initializeBoard(sample_board)
+    const player = playerFactory(true, gameboard, null);
+    const computer = playerFactory(false, sample_board, []);
+    const playerShip = gameModule.initializeBoard(gameboard);
+    const computerShip = gameModule.initializeBoard(sample_board);
 
     const mockDiv2Attack = document.querySelector('.mockDiv2Attack');
-    const hitStatus = gameModule.attackShip(player, computer, 3, 4, mockDiv2Attack);
-    expect(hitStatus).toBe(true);
+    gameModule.attackShip(player, computer, 3, 4, mockDiv2Attack);
+    expect(player.active).toBe(true);
+    expect(computer.active).toBe(false);
+    const checkNewHitClass = document.querySelectorAll('.hit');
+    expect(checkNewHitClass.length).toBe(1);
   });
 
 

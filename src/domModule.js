@@ -47,26 +47,32 @@ const DomModule = (() => {
     const gameOverDiv = document.querySelector('#flashinfo');
     const flashInfosDiv = document.getElementById('flashinfo2');
     flashInfosDiv.textContent = winningMessage;
-    gameOverDiv.innerHTML = '<img src="./assets/images/gameover.png" alt="over">';    
+    gameOverDiv.innerHTML = '<img src="./assets/images/gameover.png" alt="over">';
   };
 
   const displayRestartButton = () => {
     const retstartButton = document.getElementById('restart');
     retstartButton.classList.remove('hide');
-    retstartButton.addEventListener('click', () => { window.location.reload() }, false);
-  }
+    retstartButton.addEventListener('click', () => { window.location.reload(); }, false);
+  };
 
   const updateTotalShipSunkStatus = (statusDiv, totalShipsSunk) => {
     const status = document.getElementById(statusDiv);
     status.innerHTML = `Number of ships sunk : ${totalShipsSunk}`;
-  }
+  };
 
   const renderAngryFace = (attackedDiv) => {
     attackedDiv.innerHTML = '<img src="./assets/images/sadguy.png" alt="sad">';
-  }
+  };
 
   return {
-    renderBoard, displayShips, emptyBoard, announceWinner, displayRestartButton, updateTotalShipSunkStatus, renderAngryFace,
+    renderBoard,
+    displayShips,
+    emptyBoard,
+    announceWinner,
+    displayRestartButton,
+    updateTotalShipSunkStatus,
+    renderAngryFace,
   };
 })();
 

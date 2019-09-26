@@ -13,7 +13,7 @@ const boardFactory = () => {
 
     let rowStart = x - 1;
     if (x === 0) rowStart = 0;
-    let colStart = y - 1
+    let colStart = y - 1;
     if (y === 0) colStart = 0;
 
     let rowEnd;

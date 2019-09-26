@@ -37,14 +37,13 @@ const startGame = () => {
 
       gameModule.attackShip(player, computer, +x, +y, event.target);
       const shipsSunkByPlayer = gameModule.checkNumberOfShipSunk(playerShips);
-      DomModule.updateTotalShipSunkStatus('shipsAttackedByPlayer', shipsSunkByPlayer)
+      DomModule.updateTotalShipSunkStatus('shipsAttackedByPlayer', shipsSunkByPlayer);
 
       if (!gameModule.isThereWinner(player, computer)) {
         while (computer.active) {
           gameModule.computerAIAttack(player, computer);
-          let shipsSunkByComputer = gameModule.checkNumberOfShipSunk(computerShips);
-          DomModule.updateTotalShipSunkStatus('shipsAttackedByComputer', shipsSunkByComputer)
-
+          const shipsSunkByComputer = gameModule.checkNumberOfShipSunk(computerShips);
+          DomModule.updateTotalShipSunkStatus('shipsAttackedByComputer', shipsSunkByComputer);
         }
       }
     }, false);
