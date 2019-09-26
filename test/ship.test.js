@@ -23,4 +23,3 @@ test('Check if SHip sink', () => {
   ship.hit(2);
   expect(ship.isSunk()).toBe(true);
 });
-

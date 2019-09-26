@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Saira+Stencil+One&display=swap');
 body {
   text-align: center;
-  background-image: url("../battleship_bg.jpg");
+  background-image: url("../images/battleship_bg.jpg");
 }
+
 
 h1 {
   font-family: 'Saira Stencil One', cursive;
@@ -38,6 +39,8 @@ h1 {
   border: 1px solid black;
   position: relative;
 }
+
+
 
 div.playerBoard,
 div.computerBoard {
@@ -167,4 +170,28 @@ div.computerBoard {
 
 .hide {
   display: none;
+}
+
+
+
+@media only screen and (max-width: 680px) {
+  #playerBoard,
+  #computerBoard {
+  max-width: 85%;
+  border:1px solid gainsboro;
+  color: white;
+  height: 400px;
+  display: grid;
+  margin : auto;
+  margin-bottom: 20px;
+  grid-template-columns: repeat(10, 1fr);
+  box-sizing: border-box;
+  /*border: 1px solid black;*/
+  position: relative;
+  }
+
+  body {
+    text-align: center;
+    margin : auto;
+  }
 }
