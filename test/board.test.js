@@ -54,9 +54,7 @@ test('TESTING ATTACKS ON BOARD WITH OR WITHOUT SHIP', () => {
 
 
 test('VERIFY THAT ALL SHIPS ARE SUNK', () => {
-  sampleShip.isSunk = jest.fn(() => {
-    return true;
-  });
+  sampleShip.isSunk = jest.fn(() => true);
   const ship2 = {
     cells: [],
     length: 1,
