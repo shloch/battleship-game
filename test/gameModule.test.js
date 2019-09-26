@@ -4,17 +4,9 @@ import boardFactory from '../src/board';
 import playerFactory from '../src/player';
 
 let gameboard;
-let sampleShip;
 
 beforeEach(() => {
   gameboard = boardFactory();
-  sampleShip = {
-    cells: [],
-    length: 2,
-    isHorizontal: true,
-    hit: jest.fn(),
-    isSunk: jest.fn(() => false),
-  };
 
   document.body.innerHTML = `
   <h1>Battleship</h1>
