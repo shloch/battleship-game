@@ -89,7 +89,7 @@ const gameModule = (() => {
     const attackedDivID = document.getElementById(`${x}${y}`);
     gameModule.attackShip(computer, player, x, y, attackedDivID);
 
-    gameModule.isThereWinner(player, computer);
+    return gameModule.isThereWinner(player, computer);
   };
 
   mod.checkNumberOfShipSunk = (opponentTotalShips) => {
