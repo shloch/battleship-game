@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-This project is built with JavaScript and it depends on the [Nodes & NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) so you will need to make sure it is installed.
+This project is built with JavaScript and it depends on [Node.js & NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) so you will need to make sure it is installed.
 To verify you have successfully installed them run `node -v` to make sure node is installed. Example
 
 ```
