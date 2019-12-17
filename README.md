@@ -10,7 +10,7 @@ Battleship is a strategy type guessing game for two players. It is played on rul
 
 ## Live demo
 
-[BattleShip Demo](https://rawcdn.githack.com/truetechcode/battleship-game/9768495e4e92db01a47aac64ca4ab17633435af0/dist/index.html)
+[BattleShip Demo](https://rawcdn.githack.com/truetechcode/battleship-game/44f7347091a537f2348835d6531915b0d27a5319/dist/index.html)
 
 ## Getting Started
 
