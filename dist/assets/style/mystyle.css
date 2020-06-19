@@ -10,7 +10,7 @@ h1 {
   text-align: center;
   font-size: 72px;
   margin-top: 10px;
-  color: yellow
+  color: yellow;
 }
 
 #main {
@@ -186,8 +186,15 @@ div.computerBoard {
   margin-bottom: 20px;
   grid-template-columns: repeat(10, 1fr);
   box-sizing: border-box;
-  /*border: 1px solid black;*/
   position: relative;
+  }
+
+  #shipsAttackedByPlayer {
+    visibility: hidden;
+  }
+
+  #playerBoard {
+    display: none;
   }
 
   body {
