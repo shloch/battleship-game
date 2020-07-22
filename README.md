@@ -6,7 +6,7 @@ Battleship is a strategy type guessing game for two players. It is played on rul
 
 [How to play the game](https://en.wikipedia.org/wiki/Battleship_(game))
 
-![Battle Ship Game ScreenShoot](./dist/assets/images/Battleship_Game.png)
+![Battle Ship Game ScreenShoot](./dist/assets/images/battle.gif)
 
 ## Live demo
 
@@ -14,20 +14,6 @@ Battleship is a strategy type guessing game for two players. It is played on rul
 
 ## Getting Started
 
-<<<<<<< HEAD
-### 👤 **SHEY Louis CHIA**
-
-- Github: [shloch](https://github.com/shloch)
-- Twitter: [@shloch](https://twitter.com/shloch)
-- Linkedin: [/in/shey-louis-chia](https://www.linkedin.com/in/shey-louis-chia)
-- Email: shloch2007@yahoo.fr
-
-## 👤 **Terver Aosu**
-- Terver Aosu _https://github.com/truetechcode_
-||||||| merged common ancestors
-- Louis SHEY _https://github.com/shloch_
-- Terver Aosu _https://github.com/truetechcode_
-=======
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
@@ -77,6 +63,7 @@ Run the test with the following command:
 ```
 $ npm run test
 ```
+![Battle Ship Game ScreenShoot](./dist/assets/images/test.png)
 
 ## Deployment
 
@@ -90,8 +77,16 @@ You can deploy the project on [Heroku](https://www.heroku.com/) using the follow
     4. Visit your project URL as assigned by Heroku to see a live deployment.
 
 
-## Authors
+## Contributors
 
-* **Louis SHEY** - [shloch](https://github.com/shloch)
-* **Terver Aosu** - [truetechcode](https://github.com/truetechcode)
->>>>>>> f99d25449f78a9d6d3bc0a5d11332f3ff3e441b5
+### 👤 **SHEY Louis CHIA**
+
+- Github: [shloch](https://github.com/shloch)
+- Twitter: [@shloch](https://twitter.com/shloch)
+- Linkedin: [/in/shey-louis-chia](https://www.linkedin.com/in/shey-louis-chia)
+- Email: shloch2007@yahoo.fr
+
+
+### 👤 **Terver Aosu**
+- Github: _https://github.com/truetechcode_
+- Twitter: [@truetechcode](https://twitter.com/truetechcode)
