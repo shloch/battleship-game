@@ -70,6 +70,8 @@ You can deploy the project on [Heroku](https://www.heroku.com/) using the follow
     3. Run `heroku push` to start a deployment on Heroku.
     4. Visit your project URL as assigned by Heroku to see a live deployment.
 
+## Future features
+- Adding sound effects
 
 ## Contributors
 
