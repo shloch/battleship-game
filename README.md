@@ -25,12 +25,6 @@ To verify you have successfully installed them run `node -v` to make sure node i
 $ node -v
 v8.16.2
 ```
-Run `npm -v` to verify npm is installed successfully.
-
-```
-$ npm -v
-6.4.1
-```
 
 ### Installing
 
@@ -63,7 +57,7 @@ Run the test with the following command:
 ```
 $ npm run test
 ```
-![Battle Ship Game ScreenShoot](./dist/assets/images/test.png)
+![Battle Ship Game ScreenShoot](./dist/assets/images/tests.png)
 
 ## Deployment
 
