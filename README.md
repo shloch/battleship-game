@@ -90,3 +90,7 @@ You can deploy the project on [Heroku](https://www.heroku.com/) using the follow
 ### 👤 **Terver Aosu**
 - Github: _https://github.com/truetechcode_
 - Twitter: [@truetechcode](https://twitter.com/truetechcode)
+
+## Acknowledgements
+- https://www.theodinproject.com/
+- https://javascript.info/
